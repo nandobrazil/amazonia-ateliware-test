@@ -11,11 +11,7 @@ export class LogoutComponent {
   constructor(private authService: AuthService, private router: Router, private loadingService: LoadingService) {
     this.authService.signOut();
     this.loadingService.next(true);
-    setTimeout(() => {
     this.loadingService.next(false);
-      this.router.navigate(['/auth']).then(() => {
-        window.location.reload();
-      });
-    });
+    window.location.reload();
   }
 }

@@ -1,273 +1,93 @@
-::ng-deep .app-pages {
-  padding: 0.5rem;
-  margin: .5rem;
-  border-radius: var(--borderRadius);
-  width: calc(100% - 1rem);
-  min-height: calc(100vh - 1rem);
-  background-color: var(--darkColor);
-  position: relative;
-  overflow: hidden;
-  * {
-    //color: var(--textColorDark);
-    transition: .3s all;
-  }
+.app-pages {
+  background: url("./../../../assets/images/drone-wallpaper.jpg") no-repeat fixed;
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-  .app-loading {
-    top: 0;
-    position: absolute;
-    width: calc(100vw - 1rem);
-    height: calc(100%);
-    z-index: 9999;
-    left: 0;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.58);
-    .p-progress-spinner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100px !important;
-      height: 100px !important;
+  header {
+    .widget {
+      width: .9rem;
+      height: .9rem;
+      border-radius: 50%;
+      box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+      cursor: pointer;
+      position: relative;
+      top: -1rem;
+
+      i {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        color: #333;
+        font-size: .6rem;
+        position: absolute;
+      }
+
+      &:hover i {
+        opacity: 1
+      }
+
+      &.logout-button {
+        background-color: #FF605C;
+
+        i {
+          left: 3.7px;
+          top: 3px;
+        }
+      }
+
+      &.fullscreen-button {
+        background-color: #00CA4E;
+
+        i {
+          left: 2.8px;
+          top: 2.6px;
+        }
+      }
     }
   }
 
   #wrapper {
-    display: flex;
-    background: var(--darkColor);
-    width: 100%;
-    min-height: calc(100vh - 2rem);
-    border-radius: var(--borderRadius);
+    width: 70%;
+    min-height: 70vh;
+    padding: 2rem;
+    background-color: transparent;
+    backdrop-filter: blur(5em);
+    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+    border-radius: 3rem;
+    margin: 0 auto;
+    transition: all 0.3s ease-in-out;
 
-    .aside-menu {
-      width: 270px;
-      height: 100%;
-      position: fixed;
-      top: 0;
-      left: .5rem;
-      background: var(--darkColor);
-      padding: 1rem;
-      z-index: 90;
-
-      * {
-        color: var(--textColor);
-        transition: .3s all;
-      }
-      .row {
-        display: flex;
-        justify-content: space-between;
-
-        .config {
-          margin-top: .25rem;
-          cursor: pointer;
-          i {
-            opacity: .95;
-            &:hover {
-              text-shadow: var(--textShadow);
-              opacity: 1;
-            }
-          }
-        }
-        .close {
-          display: none;
-        }
-      }
-      .user-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        justify-content: center;
-        .user-image img {
-          height: 110px;
-          width: 110px;
-        }
-        .user-name {
-          display: flex;
-          flex-direction: column;
-          text-align: center;
-          span:first-of-type {
-            font-weight: 900;
-            font-size: .9rem;
-            color: var(--textColor);
-          }
-          span:last-of-type {
-            font-size: .8rem;
-            font-weight: 400;
-            color: var(--textGreyLight);
-          }
-        }
-      }
-      .version {
-        position: absolute;
-        bottom: .25rem;
-        right: .5rem;
-        font-size: 0.5rem;
-        font-weight: 900;
-        color: var(--textGreyLight);
-        text-transform: uppercase;
-      }
-      &.expanded {
-        width: 40px;
-        padding: .2rem;
-        left: .7rem;
-        .row {
-          .logo {
-            display: none;
-          }
-          .config {
-            margin: 1rem 0.5rem 0;
-            cursor: pointer;
-          }
-        }
-        .user-info {
-          .user-image img {
-            height: 30px;
-            width: 30px;
-            margin-left: -0.4rem;
-          }
-          .user-name {
-            display: none;
-          }
-        }
-        .version {
-          display: none;
-        }
-      }
+    &.fullscreen {
+      width: 90%;
+      min-height: 90vh;
     }
 
-    .page-content {
-      width: calc(100% - 270px);
-      border-radius: var(--borderRadius);
-      background: var(--containerBg);
-      overflow: hidden;
-      position: relative;
-      left: 270px;
-
-      &.expanded {
-        width: calc(100% - 40px);
-        left: 40px;
-      }
-
-      header {
+    .main-content {
+      .user-container {
         display: flex;
-        background: var(--containerBg);
-        justify-content: space-between;
-        padding: .3rem 0;
-        width: 100%;
-        box-shadow: var(--boxShadow);
-        app-widgets {
-          width: 100%;
-        }
-        .menu-icon {
-          padding: 1.2rem .5rem 0 1.2rem;
+
+        img {
+          width: 2rem;
           border-radius: 50%;
-          cursor: pointer;
-          transition: all .3s;
-          span {
-            width: 20px;
-            height: 2px;
-            background-color: var(--lightColor);
-            display: block;
-            margin-bottom: 3px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            transition: all .5s;
-          }
+          box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+        }
 
-          &.active span {
-            &:nth-of-type(1) {
-              transform: rotateY(180deg) rotateZ(45deg) translate(5px, 2px)
-            }
-
-            &:nth-of-type(2) {
-              transform: translateX(-20px);
-              opacity: 0;
-            }
-
-            &:nth-of-type(3) {
-              transform: rotateY(180deg) rotateZ(-45deg) translate(5px, -2px)
-            }
-          }
+        span {
+          margin-left: .75rem;
+          margin-top: .4rem;
+          font-weight: bold;
+          text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
         }
       }
-
-      .main-content {
-        padding: 1rem;
-        height: max-content;
-        color: var(--textColorDark);
-        background-color: var(--mainBg);
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    #wrapper {
-      .aside-menu {
-        width: 0;
-        padding: 0;
-        overflow: hidden;
-        &.expanded {
-          width: calc(100% - 1rem);
-          margin: .5rem;
-          left: 0;
-          padding: .5rem;
-          .row {
-            .logo {
-              display: inline;
-            }
-            .config {
-              display: none;
-            }
-          }
-          .user-info {
-            .user-image img {
-              height: 110px;
-              width: 110px;
-              margin-left: 0;
-            }
-            .user-name {
-              display: flex;
-            }
-          }
-          .version {
-            display: inline;
-          }
-        }
-      }
-      .page-content {
+      .line {
         width: 100%;
-        left: 0;
-        .menu-icon {
-          &.active span {
-            transform:  none !important;
-            opacity: 1 !important;
-          }
-        }
+        height: 2px;
+        background-color: #f1f1f142;
+        margin: 1rem 0;
 
-        &.expanded {
-          overflow: hidden;
-          width: 0 !important;
-        }
-      }
-    }
-  }
-}
-
-
-::ng-deep {
-  .panel-user {
-    display: flex;
-    flex-direction: column;
-    gap: .25rem;
-    .logout {
-      cursor: pointer;
-      flex-direction: row;
-      padding: .25rem;
-      border-bottom: 2px solid transparent;
-      transition: all .3s;
-
-      &:hover {
-        border-bottom: 2px solid var(--darkColor);
       }
     }
   }

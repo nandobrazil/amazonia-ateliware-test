@@ -7,14 +7,11 @@ import {ButtonModule} from "primeng/button";
 import {MegaMenuModule} from "primeng/megamenu";
 import {MenuComponent} from "./menu/menu.component";
 import {CoreModule} from "../core/core.module";
-import { WidgetsComponent } from './widgets/widgets.component';
-
 
 
 @NgModule({
   declarations: [
     MenuComponent,
-    WidgetsComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +25,6 @@ import { WidgetsComponent } from './widgets/widgets.component';
   ],
   exports: [
     MenuComponent,
-    WidgetsComponent,
   ]
 })
 export class LayoutModule { }

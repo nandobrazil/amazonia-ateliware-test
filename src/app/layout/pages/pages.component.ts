@@ -14,6 +14,7 @@ export class PagesComponent {
 
   loading!: boolean;
   isLogged!: boolean;
+  fullscreen = false;
   hideSidenav = false;
   constructor(
     private authService: AuthService,
@@ -34,6 +35,25 @@ export class PagesComponent {
     if (!this.isLogged) {
       this.authService.signOut();
       await this.router.navigate(['/auth']);
+    }
+  }
+
+  toggleFullscreen() {
+    const doc = window.document;
+    const docEl = doc.documentElement;
+    const requestFullScreen = docEl.requestFullscreen;
+    const exitFullScreen = doc.exitFullscreen;
+
+    if (!this.fullscreen) {
+      if (requestFullScreen) {
+        requestFullScreen.call(docEl);
+      }
+      this.fullscreen = true;
+    } else {
+      if (exitFullScreen) {
+        exitFullScreen.call(doc);
+      }
+      this.fullscreen = false;
     }
   }
 

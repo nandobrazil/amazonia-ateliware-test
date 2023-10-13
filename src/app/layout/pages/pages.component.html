@@ -1,14 +1,24 @@
 <div class="app-pages">
-  <div *ngIf="isLogged; else login" id="wrapper">
-    <aside class="aside-menu" [class.expanded]="hideSidenav">
-      <app-menu [hideSidenav]="hideSidenav"></app-menu>
-    </aside>
-
+  <div *ngIf="isLogged; else login" id="wrapper" [class.fullscreen]="fullscreen">
     <main class="page-content" [class.expanded]="hideSidenav">
       <header>
-        <app-widgets (toggleSidenav)="hideSidenav = $event"></app-widgets>
+        <div class="flex gap-2">
+          <div class="widget logout-button" routerLink="auth/logout" tooltipPosition="top" [pTooltip]="'logout'|translate">
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+          <div class="widget fullscreen-button" (click)="toggleFullscreen()" tooltipPosition="top"
+               [pTooltip]="(fullscreen ? 'nofullscreen' : 'fullscreen')|translate">
+            <i *ngIf="!fullscreen" class="fa-solid fa-up-right-and-down-left-from-center"></i>
+            <i *ngIf="fullscreen" class="fa-solid fa-down-left-and-up-right-to-center"></i>
+          </div>
+        </div>
       </header>
       <div class="main-content">
+        <div class="user-container">
+          <img src="./assets/images/user.png" alt="">
+          <span>Fernando</span>
+        </div>
+        <div class="line"></div>
         <router-outlet></router-outlet>
       </div>
     </main>

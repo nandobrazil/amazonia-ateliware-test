@@ -87,6 +87,9 @@
   "error": "Erro",
   "username": "Usuário",
   "password": "Senha",
+  "fullscreen": "Habilitar tela cheia",
+  "nofullscreen": "Desabilitar tela cheia",
+  "logout": "Sair do sistema",
   "messages": {
     "error": {
       "expired": "Sua sessão expirou",

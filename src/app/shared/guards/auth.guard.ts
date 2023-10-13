@@ -11,7 +11,6 @@ export class AuthGuard {
   ) { }
 
   async canActivate() {
-    console.log('entrei')
     const authenticated = this.authService.isLogged();
     if (!authenticated) {
       await this.router.navigate(['/auth']);

@@ -24,9 +24,8 @@ export class LoginComponent {
   }
 
   async isAuthenticated() {
-    console.log(this.authSrv.isLogged())
     if (this.authSrv.isLogged()) {
-      await this.router.navigate(['/routes']);
+      this.router.navigate(['/routes']).then(() => window.location.reload());
     }
   }
 
@@ -49,7 +48,7 @@ export class LoginComponent {
     }
     const success = await this.authSrv.signIn(this.formLogin.value);
     if (success) {
-      await this.router.navigate(['/routes']);
+      window.location.reload();
     }
   }
 
