@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;500;600;700;800;900;1000&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200&display=swap');
+
+:root {
+  color: #000;
+  --hsl-color: 210;
+  --fontFamily: 'Mulish', sans-serif;
+  --backgroundColor: #333;
+  --primaryColor: hsl(var(--hsl-color), 10%, 44%);
+  //--darkColor: background: rgb(2,0,36);
+  --darkColor: linear-gradient(0deg, rgba(17,89,162,1) 0%, rgb(13, 67, 121) 33%, rgba(17,89,162,1) 100%);
+  --lightColor: hsl(var(--hsl-color), 45%, 78%);
+  --containerBg: #FFF;
+  --mainBg: #f3f3f3;
+  --textColor: #FFF;
+  --textColorDark: #000;
+  --boxShadow: rgba(60, 64, 67, 0.1) 0px 1px 2px 0px, rgba(60, 64, 67, 0.1) 0px 1px 2px 0px;
+  --textShadow: 0px 2px 2px #282828;
+  --textGreyLight: #9B9B9B;
+  --hoverMenu: hsla(var(--hsl-color), 92%, 74%, 0.5);
+  --borderRadius: .5rem;
+}
+
+body.dark-theme {
+  --darkColor: hsl(var(--hsl-color), 29%, 16%);
+  --containerBg: hsl(var(--hsl-color), 29%, 9%);
+  --lightColor: hsl(var(--hsl-color), 27%, 60%);
+  --textColor: #FFF;
+  --textColorDark: #FFF;
+  --boxShadow: rgba(60, 64, 67, 0.1) 0px 1px 2px 0px, rgba(60, 64, 67, 0.1) 0px 1px 2px 0px;
+  --textShadow: 0px 2px 2px #282828;
+  --textGreyLight: #9B9B9B;
+  --hoverMenu: hsla(var(--hsl-color), 26%, 44%, 0.5);
+  --borderRadius: 1rem;
+}

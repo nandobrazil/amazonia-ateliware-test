@@ -1,0 +1,26 @@
+<div class="app-login">
+  <div class="container-login">
+    <div class="logo">
+      <img src="../../../../assets/images/logo.png" alt="Logo" />
+    </div>
+
+    <form [formGroup]="formLogin" class="flex h-full md:px-1 flex-column align-items-center justify-content-center gap-2">
+      <div class="p-color text-left w-full">
+        <label for="username">{{'username'|translate}} *</label>
+        <span class="p-input-icon-right w-full mt-2">
+          <i class="fa-solid fa-user"></i>
+          <input id="username" class="w-full" type="text" pInputText formControlName="username" />
+        </span>
+      </div>
+      <div class="p-color text-left w-full">
+        <label>{{'password'|translate}} *</label>
+        <div class="card flex justify-content-center w-full mt-2">
+          <p-password class="w-full" [toggleMask]="true" formControlName="password" [feedback]="false"></p-password>
+        </div>
+      </div>
+      <div class="mt-6 w-full">
+        <p-button label="Logar-se" (click)="signIn()" styleClass="p-button-rounded login-button"></p-button>
+      </div>
+    </form>
+  </div>
+</div>

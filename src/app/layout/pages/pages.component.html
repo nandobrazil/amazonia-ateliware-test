@@ -1,0 +1,26 @@
+<div class="app-pages">
+  <div *ngIf="isLogged; else login" id="wrapper">
+    <aside class="aside-menu" [class.expanded]="hideSidenav">
+      <app-menu [hideSidenav]="hideSidenav"></app-menu>
+    </aside>
+
+    <main class="page-content" [class.expanded]="hideSidenav">
+      <header>
+        <app-widgets (toggleSidenav)="hideSidenav = $event"></app-widgets>
+      </header>
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+    <p-scrollTop></p-scrollTop>
+  </div>
+  <ng-template #login>
+    <router-outlet></router-outlet>
+  </ng-template>
+  <div class="app-loading" *ngIf="loading">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  <p-toast [ngStyle]="{'position':'relative', 'z-index':'99999999'}" styleClass="pre-wrap-toast"
+           position="top-right"></p-toast>
+  <p-confirmDialog icon="pi pi-exclamation-triangle" key="deleteConfirm"></p-confirmDialog>
+</div>

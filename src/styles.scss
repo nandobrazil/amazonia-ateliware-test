@@ -1,3 +1,23 @@
 @import "primeicons/primeicons.css";
 @import "primeng/resources/primeng.css";
-@import "assets/theme.css";
+@import "assets/styles/variables";
+
+
+body {
+  font-family: var(--fontFamily);
+  background: var(--backgroundColor);
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  border-radius: var(--borderRadius);
+  border: 1px solid #e3e3e3;
+  padding: 0 1rem;
+  background-color: var(--containerBg);
+}

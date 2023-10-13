@@ -1,0 +1,36 @@
+<div class="app-menu" [class.hidenav]="hideSidenav">
+  <div class="row">
+    <div class="logo-menu" *ngIf="!hideSidenav">
+      <img ngSrc="assets/images/logo.png" alt="Logo" height="24" width="66">
+    </div>
+    <div class="flex gap-3">
+      <div class="config" (click)="op.toggle($event)">
+        <i class="fa fa-cog"></i>
+        <p-overlayPanel #op>
+          <div class="panel-user">
+            <span>Entrou como</span>
+            <span>{{user.email}}</span>
+            <hr/>
+            <div class="logout">
+              <i class="fa-solid fa-right-from-bracket"></i> Sair da conta
+            </div>
+          </div>
+        </p-overlayPanel>
+      </div>
+    </div>
+  </div>
+  <div class="user-info">
+    <div class="user-image">
+      <img src="assets/images/user.png" alt="User image">
+    </div>
+    <div class="user-name">
+      <span>{{user.name}}</span>
+      <span>{{user.email}}</span>
+    </div>
+  </div>
+  <span class="menu-label">Menu Principal</span>
+  <p-tieredMenu [model]="items"></p-tieredMenu>
+  <div class="version">
+    FoxIT v1.0
+  </div>
+</div>
