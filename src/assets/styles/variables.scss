@@ -13,7 +13,7 @@
   --mainBg: #f3f3f3;
   --textColor: #ffffff;
   --textColorDark: #000;
-  --boxShadow: rgba(60, 64, 67, 0.1) 0px 1px 2px 0px, rgba(60, 64, 67, 0.1) 0px 1px 2px 0px;
+  --boxShadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
   --textShadow: 0px 2px 2px #282828;
   --textGreyLight: #9B9B9B;
   --hoverMenu: hsla(var(--hsl-color), 92%, 74%, 0.5);
@@ -26,7 +26,7 @@ body.dark-theme {
   --lightColor: hsl(var(--hsl-color), 27%, 60%);
   --textColor: #FFF;
   --textColorDark: #FFF;
-  --boxShadow: rgba(60, 64, 67, 0.1) 0px 1px 2px 0px, rgba(60, 64, 67, 0.1) 0px 1px 2px 0px;
+  --boxShadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
   --textShadow: 0px 2px 2px #282828;
   --textGreyLight: #9B9B9B;
   --hoverMenu: hsla(var(--hsl-color), 26%, 44%, 0.5);

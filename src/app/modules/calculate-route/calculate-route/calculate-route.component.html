@@ -1,3 +1,52 @@
 <div class="app-calculate-route">
-  <h1>Routes</h1>
+  <form [formGroup]="form">
+    <div class="grid p-fluid">
+      <div class="col-12 sm:col-4 flex flex-column gap-1">
+        <label for="origin">
+          <i class="fa-solid fa-house"></i>
+          {{'informOrigin'|translate}}
+        </label>
+        <p-inputMask (onBlur)="blurChessCoordinates('origin')" mask="a9" id="origin" formControlName="origin"
+                     slotChar=" " placeholder="A1"></p-inputMask>
+      </div>
+      <div class="col-12 sm:col-4 flex flex-column gap-1">
+        <label for="package">
+          <i class="fa-solid fa-box-open"></i>
+          {{'informPackage'|translate}}
+        </label>
+        <p-inputMask (onBlur)="blurChessCoordinates('package_collection')" mask="a9" id="package"
+                     formControlName="package_collection" slotChar=" " placeholder="G2"></p-inputMask>
+      </div>
+      <div class="col-12 sm:col-4 flex flex-column gap-1">
+        <label for="destination">
+          <i class="fa-solid fa-location-dot"></i>
+          {{'informDestionation'|translate}}
+        </label>
+        <p-inputMask (onBlur)="blurChessCoordinates('destination')" mask="a9" id="destination"
+                     formControlName="destination" slotChar=" "
+                     placeholder="H8"></p-inputMask>
+      </div>
+      <div class="col-12">
+        <button pButton type="button" label="{{'calculateRoute'|translate}}" (click)="calculateRoute()"
+                [disabled]="!form.valid"></button>
+      </div>
+    </div>
+
+    <div class="chess-preview">
+      <div class="chess-container">
+        <div class="chess-axis-x" *ngFor="let chess of chessPreview">
+          <div class="chess-axis-y"
+               (click)="clickChessColumn(column.name)"
+               *ngFor="let column of chess.columns">
+            <i class="fa-solid fa-house" *ngIf="column.active && column.name === form.get('origin')?.value"></i>
+            <i class="fa-solid fa-box-open"
+               *ngIf="column.active && column.name === form.get('package_collection')?.value"></i>
+            <i class="fa-solid fa-location-dot"
+               *ngIf="column.active && column.name === form.get('destination')?.value"></i>
+            <span *ngIf="!column.active">{{column.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>

@@ -2,21 +2,29 @@
   <div *ngIf="isLogged; else login" id="wrapper" [class.fullscreen]="fullscreen">
     <main class="page-content" [class.expanded]="hideSidenav">
       <header>
-        <div class="flex gap-2">
-          <div class="widget logout-button" routerLink="auth/logout" tooltipPosition="top" [pTooltip]="'logout'|translate">
-            <i class="fa-solid fa-xmark"></i>
+        <div class="flex justify-content-between">
+          <div class="flex gap-2">
+            <div class="widget logout-button" routerLink="auth/logout" tooltipPosition="top"
+                 [pTooltip]="'logout'|translate">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="widget fullscreen-button" (click)="toggleFullscreen()" tooltipPosition="top"
+                 [pTooltip]="(fullscreen ? 'nofullscreen' : 'fullscreen')|translate">
+              <i *ngIf="!fullscreen" class="fa-solid fa-up-right-and-down-left-from-center"></i>
+              <i *ngIf="fullscreen" class="fa-solid fa-down-left-and-up-right-to-center"></i>
+            </div>
           </div>
-          <div class="widget fullscreen-button" (click)="toggleFullscreen()" tooltipPosition="top"
-               [pTooltip]="(fullscreen ? 'nofullscreen' : 'fullscreen')|translate">
-            <i *ngIf="!fullscreen" class="fa-solid fa-up-right-and-down-left-from-center"></i>
-            <i *ngIf="fullscreen" class="fa-solid fa-down-left-and-up-right-to-center"></i>
+          <div class="flex gap-3 container-buttons">
+            <p-button size="small" type="button" (click)="changeLanguage('pt-BR')" [outlined]="currentLanguage === 'en-US'">PT</p-button>
+            <p-button size="small" type="button" (click)="changeLanguage('en-US')" [outlined]="currentLanguage === 'pt-BR'">EN</p-button>
           </div>
         </div>
+
       </header>
       <div class="main-content">
         <div class="user-container">
           <img src="./assets/images/user.png" alt="">
-          <span>Fernando</span>
+          <span>{{name}}</span>
         </div>
         <div class="line"></div>
         <router-outlet></router-outlet>

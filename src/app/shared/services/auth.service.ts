@@ -9,10 +9,9 @@ import {ILoginResponse} from "../../modules/login/interfaces/ILoginResponse";
 
 interface TokenPayload {
   sub: number;
-  email: string;
-  administrator: boolean;
   exp: number;
-  key: string;
+  name: string;
+  username: boolean;
 }
 
 @Injectable({
@@ -52,13 +51,14 @@ export class AuthService {
   }
 
   saveToken(data: ILoginResponse) {
-    localStorage.setItem(StorageKeys.ACCESS_TOKEN, data.token);
-    localStorage.setItem(StorageKeys.USERNAME, data.username);
+    localStorage.setItem(StorageKeys.ACCESS_TOKEN, data.access_token);
+    const tokenPayload = JSON.parse(atob(data.access_token.split('.')[1])) as TokenPayload
+    localStorage.setItem(StorageKeys.USER, JSON.stringify(tokenPayload));
   }
 
   clearTokens() {
     localStorage.removeItem(StorageKeys.ACCESS_TOKEN);
-    localStorage.removeItem(StorageKeys.USERNAME);
+    localStorage.removeItem(StorageKeys.USER);
   }
 
 }

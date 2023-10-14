@@ -89,7 +89,11 @@
   "password": "Senha",
   "fullscreen": "Habilitar tela cheia",
   "nofullscreen": "Desabilitar tela cheia",
+  "informOrigin": "Informe a Origem",
+  "informPackage": "Informe o Pacote",
+  "informDestionation": "Informe o Destino",
   "logout": "Sair do sistema",
+  "calculateRoute": "Calcular melhor Rota",
   "messages": {
     "error": {
       "expired": "Sua sessão expirou",

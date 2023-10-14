@@ -1,0 +1,102 @@
+.app-calculate-route {
+  color: #333;
+  text-shadow: none;
+  label {
+    i {
+      margin-right: .25rem;
+      font-size: .9rem;
+    }
+  }
+  .chess-preview {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+
+    .chess-container {
+      display: flex;
+      color: #1a1a1a;
+      border-radius: .5rem;
+      overflow: hidden;
+      box-shadow: var(--boxShadow);
+      border: 1px solid rgba(241, 241, 241, 0.2588235294);
+
+      .chess-axis-x {
+        display: flex;
+        flex-direction: column-reverse;
+
+        &:nth-of-type(odd) {
+          background-color: rgba(241, 241, 241, 0.2588235294);
+
+          .chess-axis-y:nth-of-type(odd) {
+            background-color: var(--primary-color);
+            i {
+              &.fa-house {
+                color: #FFF;
+              }
+              &.fa-box-open {
+                color: #FFF;
+              }
+              &.fa-location-dot {
+                color: #FFF;
+              }
+            }
+            span {
+              color: #FFF !important;
+            }
+          }
+        }
+
+        &:nth-of-type(even) {
+          background-color: rgba(241, 241, 241, 0.2588235294);
+
+          .chess-axis-y:nth-of-type(even) {
+            background-color: var(--primary-color);
+            i {
+              &.fa-house {
+                color: #FFF;
+              }
+              &.fa-box-open {
+                color: #FFF;
+              }
+              &.fa-location-dot {
+                color: #FFF;
+              }
+            }
+            span {
+              color: #FFF !important;
+            }
+          }
+        }
+
+        .chess-axis-y {
+          cursor: pointer;
+          font-size: .9rem;
+          width: 2.25rem;
+          height: 2.25rem;
+          transition: .3s all;
+          border: 1px solid rgba(241, 241, 241, 0.2588235294);
+          border-radius: 2px;
+          position: relative;
+          span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: .3s all;
+          }
+
+          &:hover span {
+            opacity: 1;
+          }
+          i {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+      }
+    }
+  }
+}

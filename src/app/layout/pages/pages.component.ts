@@ -3,7 +3,9 @@ import {AuthService} from "../../shared/services/auth.service";
 import {LoadingService} from "../../shared/services/loading.service";
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
-import {PrimeNGConfig} from "primeng/api";
+import {MenuItem, PrimeNGConfig} from "primeng/api";
+import {TranslateChangeService} from "../../shared/services/translate-change.service";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-pages',
@@ -16,18 +18,34 @@ export class PagesComponent {
   isLogged!: boolean;
   fullscreen = false;
   hideSidenav = false;
+  currentLanguage: string | undefined;
+  name: string | undefined;
+  $destroy = new Subject();
+
   constructor(
     private authService: AuthService,
     private loadingSrv: LoadingService,
     private config: PrimeNGConfig,
     private translateSrv: TranslateService,
+    private translateChangeSrv: TranslateChangeService,
     private router: Router
   ) {
     this.loadingSrv.get().subscribe((load: boolean) => {
       this.loading = load
     });
+    this.getName();
     this.isAuthenticated().then();
     this.translateSrv.get('primeng').subscribe(res => this.config.setTranslation(res))
+    this.translateSrv.onDefaultLangChange
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(lang => {
+        this.currentLanguage = lang.lang;
+      });
+  }
+
+  getName() {
+    const userDefault = JSON.parse(localStorage.getItem('@AteliwareTest/user') || '{}');
+    this.name = userDefault?.name;
   }
 
   async isAuthenticated() {
@@ -55,6 +73,10 @@ export class PagesComponent {
       }
       this.fullscreen = false;
     }
+  }
+
+  changeLanguage(language: 'pt-BR' | 'en-US') {
+    this.translateChangeSrv.changeLangDefault(language);
   }
 
 }

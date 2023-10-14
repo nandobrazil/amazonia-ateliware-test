@@ -1,5 +1,3 @@
 export interface ILoginResponse {
-  refreshToken: string;
-  token: string;
-  username: string;
+  access_token: string;
 }

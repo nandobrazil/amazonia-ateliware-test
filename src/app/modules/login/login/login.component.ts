@@ -3,6 +3,8 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
+import {TranslateChangeService} from "../../../shared/services/translate-change.service";
+import {StorageKeys} from "../../../shared/constants/storage-key";
 
 @Component({
   selector: 'app-login',
@@ -16,11 +18,18 @@ export class LoginComponent {
     private authSrv: AuthService,
     private messageService: MessageService,
     private router: Router,
+    private translateChangeService: TranslateChangeService,
     private formBuilder: FormBuilder
   ) {
     this.isAuthenticated().then();
-
+    this.setLanguage();
     this.buildForm();
+  }
+
+  setLanguage() {
+    const lang = localStorage.getItem(StorageKeys.defaultLanguage);
+    if (!lang)
+      this.translateChangeService.changeLangDefault('pt-BR');
   }
 
   async isAuthenticated() {
