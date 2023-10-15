@@ -6,6 +6,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {MenuItem, PrimeNGConfig} from "primeng/api";
 import {TranslateChangeService} from "../../shared/services/translate-change.service";
 import {Subject, takeUntil} from "rxjs";
+import {StorageKeys} from "../../shared/constants/storage-key";
 
 @Component({
   selector: 'app-pages',
@@ -18,7 +19,7 @@ export class PagesComponent {
   isLogged!: boolean;
   fullscreen = false;
   hideSidenav = false;
-  currentLanguage: string | undefined;
+  currentLanguage: string | null;
   name: string | undefined;
   $destroy = new Subject();
 
@@ -35,6 +36,7 @@ export class PagesComponent {
     });
     this.getName();
     this.isAuthenticated().then();
+    this.currentLanguage = localStorage.getItem(StorageKeys.defaultLanguage);
     this.translateSrv.get('primeng').subscribe(res => this.config.setTranslation(res))
     this.translateSrv.onDefaultLangChange
       .pipe(takeUntil(this.$destroy))
@@ -44,7 +46,7 @@ export class PagesComponent {
   }
 
   getName() {
-    const userDefault = JSON.parse(localStorage.getItem('@AteliwareTest/user') || '{}');
+    const userDefault = JSON.parse(localStorage.getItem(StorageKeys.USER) || '{}');
     this.name = userDefault?.name;
   }
 

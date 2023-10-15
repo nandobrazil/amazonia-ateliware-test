@@ -1,30 +1,52 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IChessPreview} from "../interfaces/IChessPreview";
+import {CalculateRouteService} from "../service/calculate-route.service";
+import {MessageService} from "primeng/api";
+import {TranslateService} from "@ngx-translate/core";
+import {ICalculateRouteResponse} from "../interfaces/ICalculateRouteResponse";
 
 @Component({
   selector: 'app-calculate-route',
   templateUrl: './calculate-route.component.html',
   styleUrls: ['./calculate-route.component.scss']
 })
-export class CalculateRouteComponent {
+export class CalculateRouteComponent implements OnInit {
 
   form!: FormGroup;
   chessPreview: IChessPreview[] = [];
+  chessRoute: IChessPreview[] = [];
+  routes: ICalculateRouteResponse[] = [];
+  displayModalRoute: boolean = false;
+  selectedRoute: ICalculateRouteResponse | undefined;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private calculateRouteService: CalculateRouteService,
+    private translateService: TranslateService,
+    private messageService: MessageService
   ) {
     this.buildForm();
+  }
+
+  async ngOnInit() {
     this.buildChessPreview();
+    await this.GetAllRoutes();
   }
 
   buildForm() {
     this.form = this.formBuilder.group({
       origin: ['', Validators.required],
-      package_collection: ['', Validators.required],
+      packageCollection: ['', Validators.required],
       destination: ['', Validators.required],
     });
+  }
+
+  async GetAllRoutes() {
+    const { success, data } = await this.calculateRouteService.GetAll();
+    if (success) {
+      this.routes = data || [];
+    }
   }
 
   blurChessCoordinates(controlName: string) {
@@ -45,34 +67,67 @@ export class CalculateRouteComponent {
   activeChessPreview() {
     const origin = this.form.get('origin')?.value;
     const destination = this.form.get('destination')?.value;
-    const package_collection = this.form.get('package_collection')?.value;
+    const packageCollection = this.form.get('packageCollection')?.value;
 
     this.chessPreview = this.chessPreview.map(column => ({
       ...column,
       columns: column.columns.map(row => ({
         ...row,
-        active: row.name === origin || row.name === destination || row.name === package_collection
+        active: row.name === origin || row.name === destination || row.name === packageCollection
       }))
     }));
+  }
+  activeChessRoute(column: string, row: string) {
+
+    // this.chessPreview = this.chessPreview.map(column => ({
+    //   ...column,
+    //   columns: column.columns.map(row => ({
+    //     ...row,
+    //     active: row.name === origin || row.name === destination || row.name === packageCollection
+    //   }))
+    // }));
+  }
+
+
+  clearForm() {
+    this.form.get('origin')?.setValue('');
+    this.form.get('destination')?.setValue('');
+    this.form.get('packageCollection')?.setValue('');
+    this.activeChessPreview();
+  }
+
+  handleView(route: ICalculateRouteResponse) {
+    this.displayModalRoute = true;
+    this.selectedRoute = route;
+  }
+
+  closeModal() {
+    this.displayModalRoute = true;
+    this.selectedRoute = undefined;
+  }
+
+  showModal() {
+
   }
 
   clickChessColumn(columnName: string) {
     const origin = this.form.get('origin')?.value;
     const destination = this.form.get('destination')?.value;
-    const package_collection = this.form.get('package_collection')?.value;
+    const packageCollection = this.form.get('packageCollection')?.value;
+
     if (origin === columnName) {
       this.form.get('origin')?.setValue('');
     }
     if (destination === columnName) {
       this.form.get('destination')?.setValue('');
     }
-    if (package_collection === columnName) {
-      this.form.get('package_collection')?.setValue('');
+    if (packageCollection === columnName) {
+      this.form.get('packageCollection')?.setValue('');
     }
     if (!origin) {
       this.form.get('origin')?.setValue(columnName);
-    } else if (!package_collection) {
-      this.form.get('package_collection')?.setValue(columnName);
+    } else if (!packageCollection) {
+      this.form.get('packageCollection')?.setValue(columnName);
     } else if (!destination) {
       this.form.get('destination')?.setValue(columnName);
     }
@@ -88,9 +143,26 @@ export class CalculateRouteComponent {
       name: column,
       columns: rows.map(row => ({name: `${column}${row}`, active: false}))
     }));
+    this.chessRoute = JSON.parse(JSON.stringify(this.chessPreview));
   }
 
-  calculateRoute() {
-
+  async calculateRoute() {
+    if (!this.form.valid) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('attention'),
+        detail: this.translateService.instant('fieldsRequired')
+      });
+      return;
+    }
+    const {success, data} = await this.calculateRouteService.PostRoute(this.form.value);
+    if (success) {
+      this.messageService.add({
+        severity: 'success',
+        summary: this.translateService.instant('success'),
+        detail: this.translateService.instant('saveSuccess')
+      })
+      this.routes.push(data!);
+    }
   }
 }

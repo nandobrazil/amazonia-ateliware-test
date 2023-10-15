@@ -20,7 +20,6 @@ export class TranslateChangeService {
 
 
   changeLangDefault(lang: 'pt-BR' | 'en-US') {
-    console.log('entrei')
     if (!this.supportedLangs.includes(lang)) {
       lang = 'en-US';
     }

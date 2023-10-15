@@ -14,8 +14,8 @@
           <i class="fa-solid fa-box-open"></i>
           {{'informPackage'|translate}}
         </label>
-        <p-inputMask (onBlur)="blurChessCoordinates('package_collection')" mask="a9" id="package"
-                     formControlName="package_collection" slotChar=" " placeholder="G2"></p-inputMask>
+        <p-inputMask (onBlur)="blurChessCoordinates('packageCollection')" mask="a9" id="package"
+                     formControlName="packageCollection" slotChar=" " placeholder="G2"></p-inputMask>
       </div>
       <div class="col-12 sm:col-4 flex flex-column gap-1">
         <label for="destination">
@@ -31,22 +31,93 @@
                 [disabled]="!form.valid"></button>
       </div>
     </div>
+  </form>
 
-    <div class="chess-preview">
-      <div class="chess-container">
-        <div class="chess-axis-x" *ngFor="let chess of chessPreview">
-          <div class="chess-axis-y"
-               (click)="clickChessColumn(column.name)"
-               *ngFor="let column of chess.columns">
-            <i class="fa-solid fa-house" *ngIf="column.active && column.name === form.get('origin')?.value"></i>
-            <i class="fa-solid fa-box-open"
-               *ngIf="column.active && column.name === form.get('package_collection')?.value"></i>
-            <i class="fa-solid fa-location-dot"
-               *ngIf="column.active && column.name === form.get('destination')?.value"></i>
-            <span *ngIf="!column.active">{{column.name}}</span>
+
+  <div class="chess-preview">
+    <div class="chess-container">
+      <div class="chess-axis-x" *ngFor="let chess of chessPreview">
+        <div class="chess-axis-y" [class.active]="column.active"
+             (click)="clickChessColumn(column.name)"
+             *ngFor="let column of chess.columns">
+          <i class="fa-solid fa-house" *ngIf="column.active && column.name === form.get('origin')?.value"></i>
+          <i class="fa-solid fa-box-open"
+             *ngIf="column.active && column.name === form.get('packageCollection')?.value"></i>
+          <i class="fa-solid fa-location-dot"
+             *ngIf="column.active && column.name === form.get('destination')?.value"></i>
+          <span *ngIf="!column.active">{{column.name}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="button-info cursor-pointer flex flex-column h-full">
+      <i class="fa-solid fa-circle-info" (click)="op.toggle($event)"></i>
+      <i class="fa-solid fa-refresh" (click)="clearForm()"></i>
+    </div>
+    <p-overlayPanel #op [style]="{'width': '30rem'}">
+      <ng-template pTemplate="content">
+        <h5>{{'information'|translate}}</h5>
+        <div class="flex flex-column gap-2">
+          <span>{{'firstInfo'|translate}}</span>
+          <span>{{'secondInfo'|translate}}</span>
+          <span>{{'thirdInfo'|translate}}</span>
+          <span>{{'legend'|translate}}:</span>
+          <div class="flex justify-content-around">
+            <span><i style="font-size: .8rem;" class="fa-solid fa-house"></i> {{'origin'|translate}}</span>
+            <span><i style="font-size: .8rem;"
+                     class="fa-solid fa-box-open"></i> {{'packageCollection'|translate}}</span>
+            <span><i style="font-size: .8rem;" class="fa-solid fa-location-dot"></i> {{'destination'|translate}}</span>
+          </div>
+        </div>
+      </ng-template>
+    </p-overlayPanel>
+  </div>
+
+  <div class="col-12">
+    <p-table [value]="routes"
+             [tableStyle]="{ 'min-width': '50rem', 'border-radius': '.5rem', overflow: 'hidden', border: '1px solid rgb(63 63 63 / 26%)' }"
+             responsiveLayout="stack">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem">Id</th>
+          <th class="text-center">{{'origin'|translate}}</th>
+          <th class="text-center">{{'packageCollection'|translate}}</th>
+          <th class="text-center">{{'destination'|translate}}</th>
+          <th class="text-center">{{'timeRoute'|translate}}</th>
+          <th style="width: 4rem;"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-route>
+        <tr>
+          <td class="text-center">{{ route.id }}</td>
+          <td class="text-center">{{ route.origin }}</td>
+          <td class="text-center">{{ route.packageCollection }}</td>
+          <td class="text-center">{{ route.destination }}</td>
+          <td class="text-center">{{ route.timeRoute }}</td>
+          <td class="text-center">
+            <i class="fa-solid fa-map-location-dot button-view" tooltipPosition="top"
+               [pTooltip]="'viewBestRoute'|translate" (click)="handleView(route)"></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-dialog [header]="'bestRoute'|translate" [(visible)]="displayModalRoute"
+            (onShow)="showModal()" [modal]="true" (onHide)="closeModal()"
+            [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <div class="grid ui-fluid">
+      <div class="col-12">
+        <div class="chess-preview">
+          <div class="chess-container">
+            <div class="chess-axis-x" *ngFor="let chess of chessPreview">
+              <div class="chess-axis-y" [class.active]="column.active"
+                   *ngFor="let column of chess.columns">
+                <span>{{column.name}}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </form>
+  </p-dialog>
 </div>

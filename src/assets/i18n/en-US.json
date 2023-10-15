@@ -87,9 +87,37 @@
   "error": "Error",
   "username": "Username",
   "password": "Password",
+  "fullscreen": "Enable full screen",
+  "nofullscreen": "Disable full screen",
+  "informOrigin": "Enter the Origin",
+  "informPackage": "Enter the Package",
+  "informDestionation": "Enter the destination",
+  "logout": "Log out",
+  "calculateRoute": "Calculate best route",
+  "origin": "Origin",
+  "packageCollection":"Package",
+  "destination": "Destination",
+  "timeRoute":"Travel Time",
+  "attention": "Attention",
+  "fieldsRequired": "Fill in all fields",
+  "success": "Success",
+  "saveSuccess": "Saved successfully!",
+  "viewBestRoute": "View best route",
+  "information": "Information",
+  "firstInfo": "Based on the coordinates of a chessboard, define three coordinates to indicate the package's origin, pickup, and destination.",
+  "secondInfo": "The data must be entered using the fields above or by clicking directly on the table on the side.",
+  "thirdInfo": "When you click, each coordinate that will be marked in the fields and on the board will be defined.",
+  "legend": "Subtitles",
+  "bestRoute": "Best route",
   "messages": {
     "error": {
-      "expired": "Your session has expired."
+      "expired": "Your session has expired.",
+      "unauthorized": "Unauthorized access",
+      "usernameAlreadyExists": "The user entered already exists",
+      "usernameOrPasswordIncorrect": "Username or password entered is invalid",
+      "passwordToWeek": "Password too weak, choose a stronger password",
+      "min4char": "The minimum is 4 characters",
+      "max20char": "The maximum is 20 characters"
     }
   }
 }

@@ -1,14 +1,35 @@
-.app-calculate-route {
+::ng-deep .app-calculate-route {
   color: #333;
   text-shadow: none;
+
+  .p-datatable {
+    .p-datatable-thead > tr > th {
+      background: #0000005c;
+      color: #d8d8d8;
+      border: 1px solid rgba(241, 241, 241, 0.2588235294);
+      border-width: 0 0 1px 0;
+    }
+
+    .p-datatable-tbody > tr {
+      background: #0000005c;
+      color: #d8d8d8;
+
+      > td {
+        border: 1px solid rgba(241, 241, 241, 0.2588235294);
+        border-width: 0 0 1px 0;
+      }
+    }
+  }
+
   label {
     i {
       margin-right: .25rem;
       font-size: .9rem;
     }
   }
+
   .chess-preview {
-    margin-top: 1rem;
+    margin: 1rem 0;
     display: flex;
     justify-content: center;
 
@@ -27,19 +48,33 @@
         &:nth-of-type(odd) {
           background-color: rgba(241, 241, 241, 0.2588235294);
 
+          .chess-axis-y:nth-of-type(even) {
+            &:hover, &.active {
+              background-color: rgba(255, 255, 255, 0.7);
+            }
+          }
+
           .chess-axis-y:nth-of-type(odd) {
-            background-color: var(--primary-color);
+            background-color: #0000005c;
+
+            &:hover, &.active {
+              background-color: #1a1a1a;
+            }
+
             i {
               &.fa-house {
                 color: #FFF;
               }
+
               &.fa-box-open {
                 color: #FFF;
               }
+
               &.fa-location-dot {
                 color: #FFF;
               }
             }
+
             span {
               color: #FFF !important;
             }
@@ -49,19 +84,34 @@
         &:nth-of-type(even) {
           background-color: rgba(241, 241, 241, 0.2588235294);
 
+          .chess-axis-y:nth-of-type(odd) {
+            &:hover, &.active {
+              background-color: rgba(255, 255, 255, 0.7);
+            }
+          }
+
           .chess-axis-y:nth-of-type(even) {
-            background-color: var(--primary-color);
+            background-color: #0000005c;
+            transition: all .3s;
+
+            &:hover, &.active {
+              background-color: #1a1a1a;
+            }
+
             i {
               &.fa-house {
                 color: #FFF;
               }
+
               &.fa-box-open {
                 color: #FFF;
               }
+
               &.fa-location-dot {
                 color: #FFF;
               }
             }
+
             span {
               color: #FFF !important;
             }
@@ -77,6 +127,7 @@
           border: 1px solid rgba(241, 241, 241, 0.2588235294);
           border-radius: 2px;
           position: relative;
+
           span {
             position: absolute;
             left: 50%;
@@ -89,6 +140,7 @@
           &:hover span {
             opacity: 1;
           }
+
           i {
             position: absolute;
             left: 50%;
@@ -97,6 +149,26 @@
           }
         }
       }
+    }
+    .button-info {
+      i {
+        padding: .25rem;
+        margin-left: .5rem;
+        transition: .3s all;
+        &:hover {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+    }
+  }
+
+  .button-view {
+    cursor: pointer;
+    padding: .25rem;
+    opacity: .8;
+    transition: opacity .3s;
+    &:hover {
+      opacity: 1;
     }
   }
 }

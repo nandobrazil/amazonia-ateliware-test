@@ -94,15 +94,30 @@
   "informDestionation": "Informe o Destino",
   "logout": "Sair do sistema",
   "calculateRoute": "Calcular melhor Rota",
+  "origin": "Origem",
+  "packageCollection":"Pacote",
+  "destination": "Destino",
+  "timeRoute":"Tempo Total",
+  "attention": "Atenção",
+  "fieldsRequired": "Preencha todos os campos",
+  "success": "Sucesso",
+  "saveSuccess": "Salvo com sucesso!",
+  "viewBestRoute": "Visualizar melhor rota",
+  "information": "Informações",
+  "firstInfo": "Com base nas coordenadas de um tabuleiro de xadrez, defina três coordenadas para indicar a origem, coleta do pacote e o destino.",
+  "secondInfo": "Os dados devem ser informados pelos campos acima ou clicando diretamente no tabuleiro ao lado.",
+  "thirdInfo": "Ao clicar, será definido cada coordenada que serão marcadas nos campos e no tabuleiro.",
+  "bestRoute": "Melhor Caminho",
+  "legend": "Legendas",
   "messages": {
     "error": {
       "expired": "Sua sessão expirou",
       "unauthorized": "Acesso não autorizado",
       "usernameAlreadyExists": "O usuário informado já existe",
       "usernameOrPasswordIncorrect": "Usuário ou senha informados estão inválidos",
-      "passwordToWeek": "",
-      "min4char": "",
-      "max20char": ""
+      "passwordToWeek": "Senha muito fraca, escolha uma senha mais forte",
+      "min4char": "O mínimo é de 4 caracteres",
+      "max20char": "O máximo é de 20 caracteres"
     }
   }
 }
