@@ -167,6 +167,7 @@ export class CalculateRouteComponent implements OnInit {
         detail: this.translateService.instant('saveSuccess')
       })
       this.routes.push(data!);
+      this.handleView(data!);
       this.clearForm();
     }
   }
