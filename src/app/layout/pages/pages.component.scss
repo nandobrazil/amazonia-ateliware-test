@@ -8,7 +8,15 @@
   flex-direction: column;
   justify-content: center;
 
-
+  .p-button{
+    color: #d8d8d8 !important;
+    background: rgba(0, 0, 0, 0.3607843137) !important;
+    border: 1px solid #d8d8d8 !important;
+  }
+  .active .p-button {
+    background: var(--primary-800) !important;
+    border: 1px solid var(--primary-800) !important;
+  }
   .container-buttons .p-button {
     padding: 0.25rem 0.8rem !important;
   }
@@ -114,6 +122,15 @@
       transform: translate(-50%, -50%);
       width: 100px !important;
       height: 100px !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem 0;
+    #wrapper {
+      width: 95%;
+      min-height: 95vh;
+      padding: .5rem 1rem 1rem;
     }
   }
 }

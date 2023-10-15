@@ -128,6 +128,16 @@
           border-radius: 2px;
           position: relative;
 
+          &.active-origin {
+            background-color: var(--primary-color) !important;
+          }
+          &.active-destination {
+            background-color: var(--primary-900) !important;
+          }
+          &.active-origin span, &.active-destination span {
+            color: #FFF !important;
+            opacity: 1 !important;
+          }
           span {
             position: absolute;
             left: 50%;
@@ -169,6 +179,24 @@
     transition: opacity .3s;
     &:hover {
       opacity: 1;
+    }
+  }
+
+  .span-route {
+    margin-top: .25rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    transition: 0.3s all;
+    border: 1px solid rgba(241, 241, 241, 0.2588235294);
+    position: relative;
+    background-color: var(--primary-color);
+    color: #FFF;
+    padding: 0.25rem;
+    border-radius: 3px;
+    &.destination {
+      background-color: var(--primary-900) !important;
     }
   }
 }

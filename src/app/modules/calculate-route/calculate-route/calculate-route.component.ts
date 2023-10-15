@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {IChessPreview} from "../interfaces/IChessPreview";
+import {IChessPreview, IChessRoute} from "../interfaces/IChessPreview";
 import {CalculateRouteService} from "../service/calculate-route.service";
 import {MessageService} from "primeng/api";
 import {TranslateService} from "@ngx-translate/core";
 import {ICalculateRouteResponse} from "../interfaces/ICalculateRouteResponse";
+import {IRoutePathResponse} from "../interfaces/IRoutePathResponse";
 
 @Component({
   selector: 'app-calculate-route',
@@ -15,7 +16,7 @@ export class CalculateRouteComponent implements OnInit {
 
   form!: FormGroup;
   chessPreview: IChessPreview[] = [];
-  chessRoute: IChessPreview[] = [];
+  chessRoute: IChessRoute[] = [];
   routes: ICalculateRouteResponse[] = [];
   displayModalRoute: boolean = false;
   selectedRoute: ICalculateRouteResponse | undefined;
@@ -43,7 +44,7 @@ export class CalculateRouteComponent implements OnInit {
   }
 
   async GetAllRoutes() {
-    const { success, data } = await this.calculateRouteService.GetAll();
+    const {success, data} = await this.calculateRouteService.GetAll();
     if (success) {
       this.routes = data || [];
     }
@@ -77,17 +78,27 @@ export class CalculateRouteComponent implements OnInit {
       }))
     }));
   }
-  activeChessRoute(column: string, row: string) {
 
-    // this.chessPreview = this.chessPreview.map(column => ({
-    //   ...column,
-    //   columns: column.columns.map(row => ({
-    //     ...row,
-    //     active: row.name === origin || row.name === destination || row.name === packageCollection
-    //   }))
-    // }));
+  activeChessRoute(coordinate: string[], isOrigin: boolean = true) {
+    this.chessRoute = this.chessRoute.map((column, columnIndex) => {
+      return {
+        ...column,
+        columns: column.columns.map((row, rowIndex) => {
+          setTimeout(() => {
+            if (isOrigin)
+              this.chessRoute[columnIndex].columns[rowIndex].origin = coordinate.includes(row.name);
+            else
+              this.chessRoute[columnIndex].columns[rowIndex].destination = coordinate.includes(row.name);
+          }, (columnIndex + 1) * 500);
+          return {
+            ...row,
+            active: false
+          };
+        })
+      };
+    });
+
   }
-
 
   clearForm() {
     this.form.get('origin')?.setValue('');
@@ -99,15 +110,18 @@ export class CalculateRouteComponent implements OnInit {
   handleView(route: ICalculateRouteResponse) {
     this.displayModalRoute = true;
     this.selectedRoute = route;
+    const {origin, destination} = route?.routePaths || {origin: [], destination: []};
+    this.activeChessRoute(origin);
+    this.activeChessRoute(destination, false)
   }
 
   closeModal() {
-    this.displayModalRoute = true;
+    this.displayModalRoute = false;
     this.selectedRoute = undefined;
+    this.chessRoute = JSON.parse(JSON.stringify(this.chessPreview));
   }
 
   showModal() {
-
   }
 
   clickChessColumn(columnName: string) {
@@ -163,6 +177,7 @@ export class CalculateRouteComponent implements OnInit {
         detail: this.translateService.instant('saveSuccess')
       })
       this.routes.push(data!);
+      this.clearForm();
     }
   }
 }

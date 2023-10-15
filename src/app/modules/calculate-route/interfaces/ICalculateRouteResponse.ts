@@ -1,3 +1,5 @@
+import {IRoutePathResponse} from './IRoutePathResponse';
+
 export interface ICalculateRouteResponse {
   id: number
   origin: string
@@ -5,5 +7,5 @@ export interface ICalculateRouteResponse {
   packageCollection: string
   dateCreated: string
   timeRoute: number
-  routePaths: string[]
+  routePaths: IRoutePathResponse
 }

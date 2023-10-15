@@ -15,16 +15,19 @@
             </div>
           </div>
           <div class="flex gap-2 container-buttons">
-            <p-button size="small" type="button" (click)="changeLanguage('pt-BR')" [outlined]="currentLanguage === 'en-US'">PT</p-button>
-            <p-button size="small" type="button" (click)="changeLanguage('en-US')" [outlined]="currentLanguage === 'pt-BR'">EN</p-button>
+            <p-button size="small" type="button" [class.active]="currentLanguage === 'pt-BR'"
+                      (click)="changeLanguage('pt-BR')">PT
+            </p-button>
+            <p-button size="small" type="button" [class.active]="currentLanguage === 'en-US'"
+                      (click)="changeLanguage('en-US')">EN
+            </p-button>
           </div>
         </div>
 
       </header>
       <div class="main-content">
         <div class="user-container">
-          <img src="./assets/images/user.png" alt="">
-          <span>{{name}}</span>
+          <span>Bem vindo(a) ao sistema de Rotas, {{name}}</span>
         </div>
         <div class="line"></div>
         <router-outlet></router-outlet>

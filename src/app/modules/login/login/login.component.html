@@ -1,26 +1,85 @@
 <div class="app-login">
   <div class="container-login">
     <div class="logo">
-      <img src="../../../../assets/images/logo-dark.png" alt="Logo" />
+      <img src="../../../../assets/images/logo-dark.png" alt="Logo"/>
     </div>
 
-    <form [formGroup]="formLogin" class="flex h-full md:px-1 flex-column align-items-center justify-content-center gap-2">
-      <div class="p-color text-left w-full">
-        <label for="username">{{'username'|translate}} *</label>
-        <span class="p-input-icon-right w-full mt-2">
+    <ng-container *ngIf="!signUp; else signUpForm">
+      <form [formGroup]="formLogin"
+            class="flex h-full md:px-1 flex-column align-items-center justify-content-center gap-2">
+        <div class="p-color text-left w-full">
+          <label for="username">{{'username'|translate}} *</label>
+          <span class="p-input-icon-right w-full mt-2">
           <i class="fa-solid fa-user"></i>
-          <input id="username" class="w-full" type="text" pInputText formControlName="username" />
+          <input id="username" class="w-full" type="text" pInputText formControlName="username"/>
         </span>
-      </div>
-      <div class="p-color text-left w-full">
-        <label>{{'password'|translate}} *</label>
-        <div class="card flex justify-content-center w-full mt-2">
-          <p-password class="w-full" [toggleMask]="true" formControlName="password" [feedback]="false"></p-password>
         </div>
-      </div>
-      <div class="mt-6 w-full">
-        <p-button label="Logar-se" (click)="signIn()" styleClass="p-button-rounded login-button"></p-button>
-      </div>
-    </form>
+        <div class="p-color text-left w-full">
+          <label>{{'password'|translate}} *</label>
+          <div class="card flex justify-content-center w-full mt-2">
+            <p-password class="w-full" [toggleMask]="true" formControlName="password" [feedback]="false"></p-password>
+          </div>
+        </div>
+        <div class="mt-3">
+        <span class="signup" (click)="signUp = !signUp">
+          {{'dontHaveAccount'|translate}}
+        </span>
+        </div>
+        <div class="mt-2 w-full">
+          <p-button [label]="'signIn'|translate" (click)="signIn()"
+                    styleClass="p-button-rounded login-button"></p-button>
+        </div>
+      </form>
+    </ng-container>
+    <ng-template #signUpForm>
+      <form [formGroup]="formSignup"
+            class="flex h-full md:px-1 flex-column align-items-center justify-content-center gap-2">
+        <div class="p-color text-left w-full">
+          <label for="name">{{'name'|translate}} *</label>
+          <span class="p-input-icon-right w-full mt-2">
+            <i class="fa-solid fa-user"></i>
+            <input id="name" class="w-full" type="text" pInputText formControlName="name"/>
+          </span>
+        </div>
+        <div class="p-color text-left w-full">
+          <label for="usernameup">{{'username'|translate}} *</label>
+          <span class="p-input-icon-right w-full mt-2">
+            <i class="fa-solid fa-user"></i>
+            <input id="usernameup" class="w-full" type="text" pInputText formControlName="username"/>
+          </span>
+        </div>
+        <div class="p-color text-left w-full">
+          <label>{{'password'|translate}} *</label>
+          <div class="card flex justify-content-center w-full mt-2">
+            <p-password class="w-full" [toggleMask]="true" formControlName="password" [feedback]="true"
+                        [weakLabel]="'weak'|translate" [mediumLabel]="'medium'|translate"
+                        [strongLabel]="'strong'|translate"
+            ></p-password>
+          </div>
+        </div>
+        <div class="p-color text-left w-full">
+          <label>{{'confirmPassword'|translate}} *</label>
+          <div class="card flex justify-content-center w-full mt-2 flex-column">
+            <p-password class="w-full" [toggleMask]="true" formControlName="confirmPassword" [feedback]="true"
+                        [weakLabel]="'weak'|translate" [mediumLabel]="'medium'|translate"
+                        [strongLabel]="'strong'|translate"
+            ></p-password>
+            <span style="font-size: .8rem; color: red;"
+              *ngIf="!formSignup.get('confirmPassword')?.valid && formSignup.get('confirmPassword')?.touched">
+            {{'passwordNotMatch'|translate}}
+            </span>
+          </div>
+        </div>
+        <div class="mt-3">
+          <span class="signup" (click)="signUp = !signUp">
+            {{'alreadyHaveAccount'|translate}}
+          </span>
+        </div>
+        <div class="mt-2 w-full">
+          <p-button [label]="'register'|translate" (click)="register()"
+                    styleClass="p-button-rounded login-button"></p-button>
+        </div>
+      </form>
+    </ng-template>
   </div>
 </div>
