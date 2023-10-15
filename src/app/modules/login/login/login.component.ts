@@ -18,6 +18,7 @@ export class LoginComponent {
   formLogin!: FormGroup;
   formSignup!: FormGroup;
   signUp: boolean = false;
+  passwordPattern = /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
 
   constructor(
     private authSrv: AuthService,
@@ -53,7 +54,7 @@ export class LoginComponent {
     this.formSignup = this.formBuilder.group({
       name: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.pattern(this.passwordPattern), Validators.minLength(4), Validators.maxLength(20)]],
       confirmPassword: ['', Validators.required]
     });
 
@@ -105,7 +106,7 @@ export class LoginComponent {
       });
       return;
     }
-    const sender = { ...this.formSignup.value };
+    const sender = {...this.formSignup.value};
     delete sender.confirmPassword;
     const {success, data} = await this.authSrv.signUp(sender);
     if (success) {

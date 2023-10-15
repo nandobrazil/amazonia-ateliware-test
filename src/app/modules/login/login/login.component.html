@@ -26,7 +26,7 @@
         </span>
         </div>
         <div class="mt-2 w-full">
-          <p-button [label]="'signIn'|translate" (click)="signIn()"
+          <p-button [label]="'signIn'|translate" [disabled]="!formLogin.valid" (click)="signIn()"
                     styleClass="p-button-rounded login-button"></p-button>
         </div>
       </form>
@@ -37,7 +37,7 @@
         <div class="p-color text-left w-full">
           <label for="name">{{'name'|translate}} *</label>
           <span class="p-input-icon-right w-full mt-2">
-            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-address-card"></i>
             <input id="name" class="w-full" type="text" pInputText formControlName="name"/>
           </span>
         </div>
@@ -50,23 +50,26 @@
         </div>
         <div class="p-color text-left w-full">
           <label>{{'password'|translate}} *</label>
-          <div class="card flex justify-content-center w-full mt-2">
+          <div class="card flex justify-content-center w-full mt-2 flex-column">
             <p-password class="w-full" [toggleMask]="true" formControlName="password" [feedback]="true"
                         [weakLabel]="'weak'|translate" [mediumLabel]="'medium'|translate"
-                        [strongLabel]="'strong'|translate"
+                        [strongLabel]="'strong'|translate" [pattern]="passwordPattern"
+                        [promptLabel]="'enterPassword'|translate"
             ></p-password>
+            <span style="font-size: .8rem;"
+                  *ngIf="!formSignup.get('password')?.valid && formSignup.get('password')?.touched">
+              * {{'passwordValidation'|translate}}
+            </span>
           </div>
         </div>
         <div class="p-color text-left w-full">
           <label>{{'confirmPassword'|translate}} *</label>
           <div class="card flex justify-content-center w-full mt-2 flex-column">
-            <p-password class="w-full" [toggleMask]="true" formControlName="confirmPassword" [feedback]="true"
-                        [weakLabel]="'weak'|translate" [mediumLabel]="'medium'|translate"
-                        [strongLabel]="'strong'|translate"
+            <p-password class="w-full" [toggleMask]="true" formControlName="confirmPassword" [feedback]="false"
             ></p-password>
-            <span style="font-size: .8rem; color: red;"
+            <span style="font-size: .8rem;"
               *ngIf="!formSignup.get('confirmPassword')?.valid && formSignup.get('confirmPassword')?.touched">
-            {{'passwordNotMatch'|translate}}
+              * {{'passwordNotMatch'|translate}}
             </span>
           </div>
         </div>
@@ -76,7 +79,7 @@
           </span>
         </div>
         <div class="mt-2 w-full">
-          <p-button [label]="'register'|translate" (click)="register()"
+          <p-button [label]="'register'|translate" [disabled]="!formSignup.valid" (click)="register()"
                     styleClass="p-button-rounded login-button"></p-button>
         </div>
       </form>

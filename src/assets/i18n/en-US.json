@@ -123,8 +123,11 @@
   "passwordNotMatch": "Passwords do not match",
   "invalidFormLogin": "Invalid form, check the fields",
   "registerSuccess": "Registered successfully!",
+  "enterPassword": "Enter your password",
+  "passwordValidation": "It must be between 4 and 20 characters and be a strong password",
   "messages": {
     "error": {
+      "generic": "An error occurred, try again later",
       "expired": "Your session has expired.",
       "unauthorized": "Unauthorized access",
       "usernameAlreadyExists": "The user entered already exists",

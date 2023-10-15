@@ -123,8 +123,11 @@
   "passwordNotMatch": "As senhas não conferem",
   "invalidFormLogin": "Formulário inválido, preencha todos os campos",
   "registerSuccess": "Registrado com sucesso!",
+  "enterPassword": "Informe a senha",
+  "passwordValidation": "Deve ter entre 4 e 20 caracteres e ser uma senha forte",
   "messages": {
     "error": {
+      "generic": "Ocorreu um erro, tente novamente mais tarde",
       "expired": "Sua sessão expirou",
       "unauthorized": "Acesso não autorizado",
       "usernameAlreadyExists": "O usuário informado já existe",

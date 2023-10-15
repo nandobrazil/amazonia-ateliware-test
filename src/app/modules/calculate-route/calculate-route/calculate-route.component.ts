@@ -80,24 +80,13 @@ export class CalculateRouteComponent implements OnInit {
   }
 
   activeChessRoute(coordinate: string[], isOrigin: boolean = true) {
-    this.chessRoute = this.chessRoute.map((column, columnIndex) => {
-      return {
-        ...column,
-        columns: column.columns.map((row, rowIndex) => {
-          setTimeout(() => {
-            if (isOrigin)
-              this.chessRoute[columnIndex].columns[rowIndex].origin = coordinate.includes(row.name);
-            else
-              this.chessRoute[columnIndex].columns[rowIndex].destination = coordinate.includes(row.name);
-          }, (columnIndex + 1) * 500);
-          return {
-            ...row,
-            active: false
-          };
-        })
-      };
+    coordinate.forEach((coordinate, index) => {
+      const findCoordinate = this.chessRoute.find((column) => column.columns.find(row => row.name === coordinate))!;
+      setTimeout(() => {
+        findCoordinate.columns.find(row => row.name === coordinate)!.origin = isOrigin;
+        findCoordinate.columns.find(row => row.name === coordinate)!.destination = !isOrigin;
+      }, index * 250);
     });
-
   }
 
   clearForm() {
@@ -112,7 +101,8 @@ export class CalculateRouteComponent implements OnInit {
     this.selectedRoute = route;
     const {origin, destination} = route?.routePaths || {origin: [], destination: []};
     this.activeChessRoute(origin);
-    this.activeChessRoute(destination, false)
+    setTimeout(() => this.activeChessRoute(destination, false), origin.length * 250);
+
   }
 
   closeModal() {

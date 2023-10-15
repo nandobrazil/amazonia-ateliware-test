@@ -74,6 +74,13 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             detail: this.translateService.instant(message)
           });
           this.route.navigate(['/auth/login']);
+        } else if (error.status === 409) {
+          const message = error?.error?.message || error?.error?.erro || error?.message || 'messages.error.generic';
+          this.messageService.add({
+            summary: this.translateService.instant('error'),
+            severity: 'warn',
+            detail: this.translateService.instant(message)
+          });
         } else if (error.status === 500) {
           this.messageService.add({
             summary: this.translateService.instant('error'),
