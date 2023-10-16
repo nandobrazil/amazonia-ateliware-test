@@ -9,6 +9,10 @@ Use node v18.16.0.  Navigate to http://localhost:4232/
 npm install
 ```
 
+```bash
+npm start
+```
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
