@@ -92,7 +92,7 @@
           <td class="text-center">{{ route.origin }}</td>
           <td class="text-center">{{ route.packageCollection }}</td>
           <td class="text-center">{{ route.destination }}</td>
-          <td class="text-center">{{ route.timeRoute }}</td>
+          <td class="text-center">{{ route.timeRoute }}s</td>
           <td class="text-center">
             <i class="fa-solid fa-map-location-dot button-view" tooltipPosition="top"
                [pTooltip]="'viewBestRoute'|translate" (click)="handleView(route)"></i>
@@ -143,7 +143,7 @@
       </div>
       <div class="col-12 md:col-2 flex flex-column">
         <span class="font-bold">{{'timeRoute'|translate}}</span>
-        <span class="mt-2">{{selectedRoute?.timeRoute}}</span>
+        <span class="mt-2">{{selectedRoute?.timeRoute}}s</span>
       </div>
     </div>
   </p-dialog>
