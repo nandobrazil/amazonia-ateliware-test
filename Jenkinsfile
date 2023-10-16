@@ -9,6 +9,7 @@ def getPreviousDockerImageTag(buildNumber) {
 node {
     def appName = "amazonia-ateliware-web"
     def repositoryUrl = "https://github.com/nandobrazil/amazonia-ateliware-test.git"
+    def credentialsId = "7f918541-2f75-45ff-b592-59983d8a36a2"
     def branch = "develop"
 
     def WORKSPACE = "/var/lib/jenkins/workspace/${appName}"
